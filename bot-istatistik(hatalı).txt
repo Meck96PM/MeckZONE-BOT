@@ -1,0 +1,35 @@
+const client = new Discord.Client();
+const  Discord = require("discord.js"); 
+const moment = require("moment");
+var os = require("os")
+var mem = require("mem")
+
+module.exports.run = async(client, message, args) => {
+  const duration = moment.duration(client.uptime).format(" D [gün], H [saat], m [dakika], s [saniye]");
+
+    const embed = new Discord.MessageEmbed()
+    .setColor('FF5900')
+    .SetThumbnail(client.user.avatarURL)
+    .setTitle('<a:_yukleniyor:773473558651338764> PixelliumBOT İstatistikleri <a:_yukleniyor:773473558651338764>')
+    .addField("<a:_kral:819671520238501938>│Botun Sahipleri", "<@!655018031906291719>, <@!510971081859924026>")
+    .addField('<a:_yukleniyor2:818557315354984469>│Gecikme: ','<a:_rgbsagok:809473062785384509> `' +  client.ws.ping + '` milisaniye')
+    .addField('<a:durum_cevrimici:811223833742540810>│Aktiflik Süresi: ', '<a:_rgbsagok:809473062785384509> Bot, `' + duration + '` süreden beri aktif.')
+    .addField(':tv:│Kanal Sayısı:', '<a:_rgbsagok:809473062785384509> `' + client.channels.cache.size + '` kanal')
+    .addField('<:_RAM1:819259308465455114>│RAM Kullanımı:', '<a:_rgbsagok:809473062785384509> `' + process.memoryUsage().heapUsed / 2048 / 2048 + '` megabyte' )
+    //.addField('<:_IntelCPU:819260094969020476>│CPU Kullanımı (%):', '' + percentageCPU + '')
+    .addField('<a:_kitap1:819172868263772202>│Botun Kütüphanesi:', '<a:_rgbsagok:809473062785384509> `Discord.js`')
+    .addField('<a:_kitap2:819172951563173948>│Discord.js sürümü:', '<a:_rgbsagok:809473062785384509> `' + Discord.version + '`')
+    .setTimestamp()
+    message.channel.send(embed);
+}
+exports.conf = {
+  enabled: true,
+  guildOnly: true,
+  permlevel: 0,
+  kategori: "Genel"
+};
+
+exports.help = {
+  name: 'bot-istatistik',
+  description: 'Bot ile ilgili istatistikleri gösterir.',
+};
